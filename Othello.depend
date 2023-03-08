@@ -1,4 +1,42 @@
 # depslib dependency file v1.0
-1678284668 source:c:\users\kyler\onedrive\desktop\programming\othello_game\othello\main.cpp
+1678285717 source:c:\users\kyler\onedrive\desktop\programming\othello_game\othello\main.cpp
 	<iostream>
+	"Board.h"
+	"Game.h"
+	"Player.h"
+	"Position.h"
+	"UnplayablePosition.h"
+
+1678286193 source:c:\users\kyler\onedrive\desktop\programming\othello_game\othello\board.cpp
+	"Board.h"
+	<iostream>
+
+1678285984 c:\users\kyler\onedrive\desktop\programming\othello_game\othello\board.h
+	<iostream>
+	"Player.h"
+
+1678286316 source:c:\users\kyler\onedrive\desktop\programming\othello_game\othello\player.cpp
+	"Player.h"
+	<iostream>
+
+1678286273 c:\users\kyler\onedrive\desktop\programming\othello_game\othello\player.h
+	<iostream>
+
+1678284893 source:c:\users\kyler\onedrive\desktop\programming\othello_game\othello\position.cpp
+	"Position.h"
+
+1678286402 c:\users\kyler\onedrive\desktop\programming\othello_game\othello\position.h
+
+1678285746 source:c:\users\kyler\onedrive\desktop\programming\othello_game\othello\game.cpp
+	"Game.h"
+	"Player.h"
+
+1678285756 c:\users\kyler\onedrive\desktop\programming\othello_game\othello\game.h
+	"Player.h"
+
+1678286441 c:\users\kyler\onedrive\desktop\programming\othello_game\othello\unplayableposition.h
+	"Position.h"
+
+1678285056 source:c:\users\kyler\onedrive\desktop\programming\othello_game\othello\unplayableposition.cpp
+	"UnplayablePosition.h"
 

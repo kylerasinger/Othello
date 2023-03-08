@@ -1,7 +1,7 @@
 #ifndef UNPLAYABLEPOSITION_H
 #define UNPLAYABLEPOSITION_H
 
-#include <Position.h>
+#include "Position.h"
 
 
 class UnplayablePosition : public Position
@@ -9,6 +9,7 @@ class UnplayablePosition : public Position
     public:
         UnplayablePosition();
         virtual ~UnplayablePosition();
+        static const char UNPLAYABLE = '*';
 
     protected:
 

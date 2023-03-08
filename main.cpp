@@ -12,6 +12,6 @@ using namespace std;
 
 int main()
 {
-    cout << "Teshahat" << endl;
+    cout << "Test" << endl;
     return 0;
 }
