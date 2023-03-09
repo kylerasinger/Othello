@@ -20,3 +20,8 @@ void Game::start()
 {
 
 }
+
+void Game::setBoard(Board boardIn)
+{
+    board = boardIn;
+}

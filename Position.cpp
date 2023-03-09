@@ -9,3 +9,8 @@ Position::~Position()
 {
     //dtor
 }
+
+bool Position::canPlay()
+{
+
+}

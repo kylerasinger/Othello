@@ -7,7 +7,7 @@ class Position
     public:
         Position();
         virtual ~Position();
-        bool canPlay();
+        virtual bool canPlay();
         static const char EMPTY = ' ';
         static const char BLACK = 'B';
         static const char WHITE = 'W';

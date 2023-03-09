@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include "Player.h"
+#include "Position.h"
 
 class Board
 {
@@ -15,9 +16,18 @@ class Board
         Board(std::string save_file);
         void play();
 
+        void setFirst(std::string s);
+        void setSecond(std::string s);
+        void setCurrent(std::string s);
+
     protected:
 
     private:
+        Player first;
+        Player second;
+        Player current;
+        Position boardPositions[64];
+
         void save();
         void takeTurn();
 };
