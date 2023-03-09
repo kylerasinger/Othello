@@ -7,14 +7,14 @@
 	"Position.h"
 	"UnplayablePosition.h"
 
-1678329942 source:c:\users\kyler\onedrive\desktop\programming\othello_game\othello\board.cpp
+1678374311 source:c:\users\kyler\onedrive\desktop\programming\othello_game\othello\board.cpp
 	"Board.h"
 	<iostream>
 	<fstream>
 	<sstream>
 	<string>
 
-1678329955 c:\users\kyler\onedrive\desktop\programming\othello_game\othello\board.h
+1678373950 c:\users\kyler\onedrive\desktop\programming\othello_game\othello\board.h
 	<iostream>
 	"Player.h"
 	"Position.h"
@@ -26,7 +26,7 @@
 1678325919 c:\users\kyler\onedrive\desktop\programming\othello_game\othello\player.h
 	<iostream>
 
-1678284893 source:c:\users\kyler\onedrive\desktop\programming\othello_game\othello\position.cpp
+1678330092 source:c:\users\kyler\onedrive\desktop\programming\othello_game\othello\position.cpp
 	"Position.h"
 
 1678329942 c:\users\kyler\onedrive\desktop\programming\othello_game\othello\position.h

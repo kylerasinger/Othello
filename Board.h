@@ -11,7 +11,7 @@ class Board
         Board();
         virtual ~Board();
         void drawBoard();
-        Board load();
+        static Board load();
         Board(Player p1, Player p2, int start);
         Board(std::string save_file);
         void play();
