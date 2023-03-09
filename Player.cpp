@@ -12,7 +12,7 @@ Player::~Player()
     //dtor
 }
 
-Player::Player(std::string name)
+Player::Player(std::string n)
 {
-
+    name = n;
 }

@@ -19,6 +19,8 @@ class Board
         void setFirst(std::string s);
         void setSecond(std::string s);
         void setCurrent(std::string s);
+        void setBoardPositions(std::string s);
+        //Position getBoardPositions(short n);
 
     protected:
 

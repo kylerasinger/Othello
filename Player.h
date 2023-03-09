@@ -8,7 +8,7 @@ class Player
     public:
         Player();
         virtual ~Player();
-        Player(std::string name);
+        Player(std::string n);
 
     protected:
 
