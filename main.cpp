@@ -7,6 +7,10 @@
 #include "Player.h"
 #include "Position.h"
 #include "UnplayablePosition.h"
+#include <fstream>
+#include <sstream>
+#include <string>
+#include <algorithm>
 
 using namespace std;
 
@@ -20,7 +24,6 @@ int main()
         cin >> menuSelection;
     }
 
-
     switch(menuSelection){
         case '1':{ //Quit
             cout << "Closing Program... ";
@@ -29,9 +32,98 @@ int main()
         case '2':{ //Load a game
             Board first;
             first = first.load();
+            break;
         }
-        case '3':{ //Save a game
+        case '3':{ //Start a new game
+            cout << "Starting a new game... \n" ;
+            string firstName;
+            string secondName;
+            int firstTurn; //1 for first, 2 for second.
 
+            cout << "\nEnter player 1: ";
+            cin >> firstName;
+
+            do{
+                cout << "Enter player 2: ";
+                cin >> secondName;
+            }
+            while(firstName == secondName);
+
+
+
+            Game newGame(firstName, secondName);
+            newGame.setBoard(newGame.getBoard());
+
+            //ask use which board?
+            short startOption;
+            cout << "Starting boards: \n\n";
+
+            //print default boards
+            //___can probably make this a method.
+
+            string defaultBoardOne = "default_1.txt";
+            ifstream boardFileOne(defaultBoardOne);
+            ostringstream ss;
+
+            string defaultBoardTwo = "default_2.txt";
+            ifstream boardFileTwo(defaultBoardTwo);
+            ostringstream ss2;
+
+            int currentLine = 0;
+            string line;
+            ostringstream ssBoard;
+            while(!boardFileOne.eof())
+            {
+                currentLine++;
+                getline(boardFileOne, line);
+                ssBoard << line;
+                ssBoard << "\n";
+            }
+
+            currentLine = 0;
+            string line2;
+            ostringstream ssBoard2;
+            while(!boardFileTwo.eof())
+            {
+                currentLine++;
+                getline(boardFileTwo, line2);
+                ssBoard2 << line2;
+                ssBoard2 << "\n";
+            }
+
+            cout << "1. \n" << ssBoard.str() << "\n";
+            cout << "2. \n" << ssBoard2.str();
+
+            string boardOneString = ssBoard.str();
+            string boardTwoString = ssBoard2.str();
+
+            //removes '\n' from the strings, letting it be passed into setBoardPositions.
+            boardOneString.erase(std::remove(boardOneString.begin(), boardOneString.end(), '\n'),
+                    boardOneString.end());
+            boardTwoString.erase(std::remove(boardTwoString.begin(), boardTwoString.end(), '\n'),
+                    boardTwoString.end());
+
+            //get input for default boards
+            char input1 = '0';
+            cout << "Default board selection: ";
+            cin.clear();
+            cin.ignore();
+            cin >> input1;
+
+            //set newGames board to the chosen default board.
+            string boardString = "unitiliazed";
+            if(input1 == '1')
+            {
+                boardString = boardOneString;
+            }else if(input1 == '2')
+            {
+                boardString = boardTwoString;
+            }
+            Board theBoard;
+            theBoard = newGame.getBoard();
+            theBoard.setBoardPositions(boardString);
+
+            break;
         }
 
     }

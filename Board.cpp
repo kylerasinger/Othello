@@ -3,6 +3,7 @@
 #include <fstream>
 #include <sstream>
 #include <string>
+#include "UnplayablePosition.h"
 
 Board::Board()
 {
@@ -65,7 +66,13 @@ Board Board::load()
 
 Board::Board(Player p1, Player p2, int start)
 {
-
+    first = p1;
+    second = p2;
+    if(start == 1){
+        current = p1;
+    }else if(start == 2){
+        current = p2;
+    }
 }
 
 Board::Board(std::string save_file)
@@ -134,21 +141,6 @@ void Board::takeTurn()
 
 }
 
-void Board::setFirst(std::string s)
-{
-    Player first(s);
-}
-
-void Board::setSecond(std::string s)
-{
-    Player second(s);
-}
-
-void Board::setCurrent(std::string s)
-{
-    Player third(s);
-}
-
 void Board::setBoardPositions(std::string s)
 {
 
@@ -157,6 +149,10 @@ void Board::setBoardPositions(std::string s)
         boardPositions[i].setPiece(s[i]);
     }
     //draws board, dont need this after
-    //Board::drawBoard();
+    for(int i = 0; i < 4; i++)
+    {
+        boardPositions[2+i].setPiece(UnplayablePosition::UNPLAYABLE);
+    }
+    std::cout << "-===- LOADED BOARD -===-";
+    Board::drawBoard();
 }
-

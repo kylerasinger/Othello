@@ -1,29 +1,33 @@
 # depslib dependency file v1.0
-1678325480 source:c:\users\kyler\onedrive\desktop\programming\othello_game\othello\main.cpp
+1678560948 source:c:\users\kyler\onedrive\desktop\programming\othello_game\othello\main.cpp
 	<iostream>
 	"Board.h"
 	"Game.h"
 	"Player.h"
 	"Position.h"
 	"UnplayablePosition.h"
+	<fstream>
+	<sstream>
+	<string>
+	<algorithm>
 
-1678378732 source:c:\users\kyler\onedrive\desktop\programming\othello_game\othello\board.cpp
+1678561882 source:c:\users\kyler\onedrive\desktop\programming\othello_game\othello\board.cpp
 	"Board.h"
 	<iostream>
 	<fstream>
 	<sstream>
 	<string>
 
-1678377515 c:\users\kyler\onedrive\desktop\programming\othello_game\othello\board.h
+1678469622 c:\users\kyler\onedrive\desktop\programming\othello_game\othello\board.h
 	<iostream>
 	"Player.h"
 	"Position.h"
 
-1678375801 source:c:\users\kyler\onedrive\desktop\programming\othello_game\othello\player.cpp
+1678466491 source:c:\users\kyler\onedrive\desktop\programming\othello_game\othello\player.cpp
 	"Player.h"
 	<iostream>
 
-1678375801 c:\users\kyler\onedrive\desktop\programming\othello_game\othello\player.h
+1678466491 c:\users\kyler\onedrive\desktop\programming\othello_game\othello\player.h
 	<iostream>
 
 1678377270 source:c:\users\kyler\onedrive\desktop\programming\othello_game\othello\position.cpp
@@ -31,11 +35,11 @@
 
 1678377265 c:\users\kyler\onedrive\desktop\programming\othello_game\othello\position.h
 
-1678324684 source:c:\users\kyler\onedrive\desktop\programming\othello_game\othello\game.cpp
+1678469264 source:c:\users\kyler\onedrive\desktop\programming\othello_game\othello\game.cpp
 	"Game.h"
 	"Player.h"
 
-1678324589 c:\users\kyler\onedrive\desktop\programming\othello_game\othello\game.h
+1678466715 c:\users\kyler\onedrive\desktop\programming\othello_game\othello\game.h
 	"Player.h"
 	"Board.h"
 

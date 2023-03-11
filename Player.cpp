@@ -16,3 +16,8 @@ Player::Player(std::string n)
 {
     name = n;
 }
+
+std::string Player::getName()
+{
+    return name;
+}

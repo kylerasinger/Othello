@@ -16,11 +16,11 @@ class Board
         Board(std::string save_file);
         void play();
 
-        void setFirst(std::string s);
-        void setSecond(std::string s);
-        void setCurrent(std::string s);
         void setBoardPositions(std::string s);
         //Position getBoardPositions(short n);
+
+        void loadStartBoards();
+
 
     protected:
 
@@ -29,9 +29,12 @@ class Board
         Player second;
         Player current;
         Position boardPositions[64];
+        //*Position startBoardOne[64];
+        //*Position startBoardTwo[64];
 
         void save();
         void takeTurn();
+
 };
 
 #endif // BOARD_H

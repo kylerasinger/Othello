@@ -9,6 +9,7 @@ class Player
         Player();
         virtual ~Player();
         Player(std::string n);
+        std::string getName();
 
     protected:
 
