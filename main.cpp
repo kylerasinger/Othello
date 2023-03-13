@@ -17,7 +17,7 @@ using namespace std;
 int main()
 {
     char menuSelection;
-    cout << " -===- Othello -===- \n\n 1. Quit \n 2. Load a game \n 3. Start a new game. \n\n";
+    cout << " -===- OTHELLO -===- \n\n 1. Quit \n 2. Load a game \n 3. Start a new game. \n\n";
     cin >> menuSelection;
     while(menuSelection != '1' && menuSelection != '2' && menuSelection != '3'){
         cout << "That is not an option, try again: \n";
@@ -32,6 +32,12 @@ int main()
         case '2':{ //Load a game
             Board first;
             first = first.load();
+
+            Game newGame;
+            newGame.setBoard(first);
+
+            newGame.start();
+
             break;
         }
         case '3':{ //Start a new game
@@ -49,11 +55,17 @@ int main()
             }
             while(firstName == secondName);
 
+            Player firstPlayer(firstName);
+            Player secondPlayer(secondName);
+            //cout << "TEST OF NAME: " << firstPlayer.getName() << firstPlayer.getName() << firstPlayer.getName();
 
 
-            Game newGame(firstName, secondName);
-            newGame.setBoard(newGame.getBoard());
+            Game newGame(firstPlayer, secondPlayer);
+            //newGame.setBoard(newGame.getBoard());
 
+            system("CLS");
+
+            cout << "-===- CHOOSE BOARD -===- \n";
             //ask use which board?
             short startOption;
             cout << "Starting boards: \n\n";
@@ -119,9 +131,15 @@ int main()
             {
                 boardString = boardTwoString;
             }
+
+            system("CLS");
+
             Board theBoard;
             theBoard = newGame.getBoard();
-            theBoard.setBoardPositions(boardString);
+            theBoard.setBoardPositions(boardString); //draws aswell
+
+            newGame.start();
+
 
             break;
         }

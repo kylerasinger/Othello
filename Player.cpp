@@ -21,3 +21,8 @@ std::string Player::getName()
 {
     return name;
 }
+
+void Player::operator=(Player p)
+{
+    Player::name = p.getName();
+}

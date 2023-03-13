@@ -31,6 +31,10 @@ void Board::drawBoard()
         counter = 0;
         std::cout << "\n";
     }
+
+    Player currentTEST = getPlayerCurrent();
+
+    std::cout << "\nIt is " << getPlayerCurrent().getName() << "'s turn.";
 }
 
 Board Board::load()
@@ -68,6 +72,11 @@ Board::Board(Player p1, Player p2, int start)
 {
     first = p1;
     second = p2;
+    /**
+    std::cout << "TEST OF NAME: " << first.getName() << first.getName() << first.getName();
+    std::string test;
+    std::cin >> test;
+    */
     if(start == 1){
         current = p1;
     }else if(start == 2){
@@ -138,7 +147,15 @@ void Board::save()
 
 void Board::takeTurn()
 {
+    //toggles current
 
+    if(current.getName() == first.getName())
+    {
+        setPlayerCurrent(second);
+    }else if(current.getName() == second.getName())
+    {
+        setPlayerCurrent(first);
+    }
 }
 
 void Board::setBoardPositions(std::string s)
@@ -149,10 +166,42 @@ void Board::setBoardPositions(std::string s)
         boardPositions[i].setPiece(s[i]);
     }
     //draws board, dont need this after
+    /**
     for(int i = 0; i < 4; i++)
     {
         boardPositions[2+i].setPiece(UnplayablePosition::UNPLAYABLE);
     }
+    */
     std::cout << "-===- LOADED BOARD -===-";
     Board::drawBoard();
+}
+
+void Board::setPlayerOne(Player p)
+{
+    first = p;
+}
+
+void Board::setPlayerTwo(Player p)
+{
+    second = p;
+}
+
+void Board::setPlayerCurrent(Player p)
+{
+    current = p;
+}
+
+Player Board::getPlayerOne()
+{
+    return first;
+}
+
+Player Board::getPlayerTwo()
+{
+    return second;
+}
+
+Player Board::getPlayerCurrent()
+{
+    return current;
 }

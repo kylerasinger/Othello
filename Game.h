@@ -11,6 +11,7 @@ class Game
         virtual ~Game();
         Game(Player p1, Player p2);
         void start();
+
         void setBoard(Board b);
         Board getBoard();
 

@@ -10,6 +10,7 @@ class Player
         virtual ~Player();
         Player(std::string n);
         std::string getName();
+        void operator=(Player p);
 
     protected:
 

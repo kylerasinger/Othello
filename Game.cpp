@@ -18,14 +18,18 @@ Game::Game(Player p1, Player p2)
     std::cout << "\n\nWho goes first?\n     1. " << p1.getName() << "\n     2. " << p2.getName() << std::endl;
     std::cin >> firstTurn;
 
+    //std::cout << "TEST OF NAME: " << p1.getName() << p1.getName() << p1.getName();
+
     Board newBoard(p1, p2, firstTurn);
+    setBoard(newBoard);
+    //std::cin >> firstTurn;
 
     //ask for which board
     //*newBoard.loadStartBoards();
 
 }
 
-void Game::start()
+void Game::start() //holds game loop?
 {
 
 }

@@ -21,6 +21,14 @@ class Board
 
         void loadStartBoards();
 
+        void setPlayerOne(Player p);
+        void setPlayerTwo(Player p);
+        void setPlayerCurrent(Player p);
+
+        Player getPlayerOne();
+        Player getPlayerTwo();
+        Player getPlayerCurrent();
+
 
     protected:
 
