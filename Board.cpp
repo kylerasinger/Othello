@@ -3,7 +3,9 @@
 #include <fstream>
 #include <sstream>
 #include <string>
+#include <cstring>
 #include "UnplayablePosition.h"
+#include "Position.h"
 
 Board::Board()
 {
@@ -32,9 +34,7 @@ void Board::drawBoard()
         std::cout << "\n";
     }
 
-    Player currentTEST = getPlayerCurrent();
 
-    std::cout << "\nIt is " << getPlayerCurrent().getName() << "'s turn.";
 }
 
 Board Board::load()
@@ -128,16 +128,135 @@ Board::Board(std::string save_file)
     //std::cout << "\nBoard str is : " << ssBoard.str();
 
 
-    Player first(ssFirst.str());
-    Player second(ssSecond.str());
-    Player current(ssCurrent.str());
+    Player firsti(ssFirst.str());
+    first = firsti;
+    Player secondi(ssSecond.str());
+    second = secondi;
+    Player currenti(ssCurrent.str());
+    current = currenti;
     setBoardPositions(ssBoard.str());
-
 }
 
 void Board::play()
 {
+    std::cout << "\n\n\nNEW TURN\n\n\n";
+    system("CLS");
+    { //win condition checker
+        int counter = 64;
+        for(int i = 0; i < 64; i++){
+            if(boardPositions[i].getPiece() == '.'){
+                counter--;
+            }
+        }
 
+        if(counter == 0){ //all positions are full
+            //count for winner
+            int counterB = 0;
+            int counterW = 0;
+
+            for(int i = 0; i < 64; i++){
+                if(boardPositions[i].getPiece() == 'B'){
+                    counterB++;
+                }
+
+                if(boardPositions[i].getPiece() == 'W'){
+                    counterW++;
+                }
+            }
+
+            if(counterB > counterW){
+                std::cout << "BLACK IS THE WINNER.\n ";
+            }else if(counterW > counterB){
+                std::cout << "WHITE IS THE WINNER.\n ";
+            }else if(counterW == counterB) {
+                std::cout << "THE GAME IS A DRAW.\n ";
+            }
+        }
+    }
+    //prompt user options
+
+    Board::drawBoard();
+
+    int input;
+    std::cout << "\n\nIt is " << current.getName() << "'s turn.";
+    if(current.getName() == first.getName()){std::cout << "\nPlace a BLACK (B) token. ";}
+    else if(current.getName() == second.getName()){std::cout << "\nPlace a WHITE (W) token. ";}
+    std::cout << "\n\t1. Move\n\t2. Save\n\t3. Concede the game (loser)\n\t4. Forfeit your turn\n";
+    std::cin >> input;
+
+    switch(input){
+        case 1:{ //1. Move
+            int indexY;
+            char indexX;
+            int indexFinal = 100;
+            int flag;
+
+            do{
+                flag = 0;
+                indexY = 0;
+                indexX = 0;
+                std::cout << "Enter your move (horizontal index, vertical index): ";
+                std::cin >> indexX;
+                std::cin >> indexY;
+                indexX = indexX - 48;
+                std::cout << "indexX = " << indexX << "   indexY = " << indexY << std::endl;
+
+                //convert indexes to 1d array
+                int indexXint = (int)(indexX - 48) - 1;
+                indexY = indexY - 1;
+                indexY = indexY * 8;
+                indexFinal = indexY + indexXint;
+                //std::cout << "indexXint = " << indexXint << "    indexY = " << indexY << "   indexFinal = " << indexFinal;
+
+                //illegal conditions
+                if(indexFinal > 63){flag = 1;}
+                if(indexFinal < 0){flag = 2;}
+                if(boardPositions[indexFinal].canPlay() == false){flag = 3;}
+
+                //does it flank an opposite token?
+
+
+                //std::cout << "\nflag: " << flag;
+            }while(flag != 0);
+            std::cout << "MADE IT OUT OF THE LOOP . ";
+
+
+            //boardPositions[indexFinal].setPiece(Position::BLACK);
+
+
+            takeTurn();
+            break;
+        }
+        case 2:{ //2. Save
+
+            break;
+        }
+        case 3:{ //3. Concede the game
+            std::string str1 = first.getName();
+            std::string str2 = second.getName();
+            std::string strCurrent = current.getName();
+
+            if(strCurrent == str1)
+            {
+                std::cout << "WHITE IS THE WINNER. " << str2;
+            }else if(strCurrent == str2)
+            {
+                std::cout << "BLACK IS THE WINNER. " << str1;
+            }
+            char n;
+            std::cout << "Save the game? (y/n): ";
+            std::cin >> n;
+            if(n == 'y'){
+                save();
+
+            }
+            break;
+        }
+        case 4:{ //4. Forfeit their turn
+            takeTurn();
+            break;
+        }
+    }
 }
 
 void Board::save()
@@ -149,13 +268,22 @@ void Board::takeTurn()
 {
     //toggles current
 
-    if(current.getName() == first.getName())
+    std::string str1 = first.getName();
+    std::string str2 = second.getName();
+    std::string strCurrent = current.getName();
+
+    std::cout << "\n" << current.getName() << "'s turn is now over. ";
+    if(strCurrent == str1)
     {
-        setPlayerCurrent(second);
-    }else if(current.getName() == second.getName())
+        //std::cout << "current == first" ;
+        current = second;
+        //std::cout << "the current name is now " << current.getName();
+    }else if(strCurrent == str2)
     {
-        setPlayerCurrent(first);
+        //std::cout << "current == second";
+        current = first;
     }
+
 }
 
 void Board::setBoardPositions(std::string s)
@@ -163,19 +291,61 @@ void Board::setBoardPositions(std::string s)
 
     for(int i = 0; i < s.length(); i++)
     {
-        boardPositions[i].setPiece(s[i]);
+        Board::boardPositions[i].setPiece(s[i]);
     }
-    //draws board, dont need this after
-    /**
-    for(int i = 0; i < 4; i++)
-    {
-        boardPositions[2+i].setPiece(UnplayablePosition::UNPLAYABLE);
-    }
-    */
-    std::cout << "-===- LOADED BOARD -===-";
-    Board::drawBoard();
 }
 
+void Board::makeMove(int pos)
+{
+    /**
+                OUTFLANK PSEUDOCODE
+                N
+
+                NE
+
+                E
+
+                SE
+
+                S
+
+                SW
+
+                W
+
+                NW
+                */
+}
+
+//getters and setters
+bool Board::checkMove(int pos)
+{
+    int flag = 0;
+    bool loop = true;
+    char selfPiece;
+    if(current.getName() == first.getName()){selfPiece = 'B';}
+    if(current.getName() == second.getName()){selfPiece = 'W';}
+
+//
+    loop = true;
+
+    while(loop){
+        //if(boardPositions[pos].getPiece())
+    }
+//                NE
+
+//                E
+
+//                SE
+
+//                S
+
+//                SW
+
+//                W
+
+//                NW
+}
 void Board::setPlayerOne(Player p)
 {
     first = p;

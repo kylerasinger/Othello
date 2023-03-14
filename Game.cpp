@@ -1,5 +1,6 @@
 #include "Game.h"
 #include "Player.h"
+#include "Board.h"
 
 Game::Game()
 {
@@ -31,7 +32,11 @@ Game::Game(Player p1, Player p2)
 
 void Game::start() //holds game loop?
 {
-
+    bool quitGame = false;
+    while(!quitGame)
+    {
+        board.play();
+    }
 }
 
 void Game::setBoard(Board b)
@@ -43,3 +48,4 @@ Board Game::getBoard()
 {
     return board;
 }
+

@@ -8,7 +8,7 @@ class Position
         Position();
         virtual ~Position();
         virtual bool canPlay();
-        static const char EMPTY = ' ';
+        static const char EMPTY = '.';
         static const char BLACK = 'B';
         static const char WHITE = 'W';
         void setPiece(char n);

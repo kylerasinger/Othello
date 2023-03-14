@@ -1,6 +1,8 @@
 //Kyle Rasinger, 40247163
 //March 8th 2023
 
+//LEFT OFF ON Board::checkMove() (2023-03-14)
+
 #include <iostream>
 #include "Board.h"
 #include "Game.h"
@@ -136,7 +138,9 @@ int main()
 
             Board theBoard;
             theBoard = newGame.getBoard();
+            //cout << " MEGA TEST " << boardString;
             theBoard.setBoardPositions(boardString); //draws aswell
+            newGame.setBoard(theBoard);
 
             newGame.start();
 

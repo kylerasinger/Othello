@@ -12,6 +12,12 @@ Position::~Position()
 
 bool Position::canPlay()
 {
+    if(piece == '.')
+    {
+        return true;
+    }else{
+        return false;
+    }
 
 }
 

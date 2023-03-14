@@ -15,6 +15,9 @@ class Board
         Board(Player p1, Player p2, int start);
         Board(std::string save_file);
         void play();
+        void makeMove(int pos);
+        bool checkMove(int pos);
+
 
         void setBoardPositions(std::string s);
         //Position getBoardPositions(short n);
@@ -30,11 +33,14 @@ class Board
         Player getPlayerCurrent();
 
 
+
+
+
     protected:
 
     private:
-        Player first;
-        Player second;
+        Player first; //BLACK
+        Player second; //WHITE
         Player current;
         Position boardPositions[64];
         //*Position startBoardOne[64];
