@@ -214,11 +214,12 @@ void Board::play()
                 if(boardPositions[indexFinal].canPlay() == false){flag = 3;}
 
                 //does it flank an opposite token?
-
+                if(checkMove(indexFinal) == true){std::cout << "LEGAL MOVE ";}else{std::cout << "ILLEGAL MOVE";}
 
                 //std::cout << "\nflag: " << flag;
             }while(flag != 0);
             std::cout << "MADE IT OUT OF THE LOOP . ";
+            std::cin >> indexX;
 
 
             //boardPositions[indexFinal].setPiece(Position::BLACK);
@@ -320,32 +321,145 @@ void Board::makeMove(int pos)
 //getters and setters
 bool Board::checkMove(int pos)
 {
+    /**
+    This currently returns true if just one direction will outflank pieces.
+    This saves time as it will not go through all 8 directions, instead just go until it finds one possibility
+    In make move it will need to view all 8 directions, cannot skip any.
+        could possible take the results from this method and pass it into the makeMove() method so reduce the
+        amount of computations.
+    */
+
     int flag = 0;
     bool loop = true;
     char selfPiece;
-    if(current.getName() == first.getName()){selfPiece = 'B';}
-    if(current.getName() == second.getName()){selfPiece = 'W';}
+    char oppoPiece;
+    if(current.getName() == first.getName()){selfPiece = 'B'; oppoPiece = 'W';}
+    if(current.getName() == second.getName()){selfPiece = 'W'; oppoPiece = 'B';}
 
-//
+    int posN = pos - 8;
+    int posNE = pos - 7;
+    int posE = pos + 1;
+    int posSE = pos + 9;
+    int posS = pos + 8;
+    int posSW = pos + 7;
+    int posW = pos - 1;
+    int posNW = pos - 9;
+    short pieceCount = 0;
+
+    //check N
+    pieceCount = 0;
     loop = true;
-
     while(loop){
-        //if(boardPositions[pos].getPiece())
+        std::cout << "\n\nChecking N: " << boardPositions[posN].getPiece();
+        if(boardPositions[posN].getPiece() == '.'){loop = false;}
+        if(boardPositions[posN].getPiece() == oppoPiece){pieceCount++;}
+        if(boardPositions[posN].getPiece() == selfPiece && pieceCount > 0){
+            std::cout << "\n\nfound the flanking piece in the North";
+            return true;
+        }
+        posN = posN - 8;
     }
-//                NE
 
-//                E
+    //check NE
+    pieceCount = 0;
+    loop = true;
+    while(loop){
+        std::cout << "\n\nChecking NE: " << boardPositions[posNE].getPiece();
+        if(boardPositions[posNE].getPiece() == '.'){loop = false;}
+        if(boardPositions[posNE].getPiece() == oppoPiece){pieceCount++;}
+        if(boardPositions[posNE].getPiece() == selfPiece && pieceCount > 0){
+            std::cout << "\n\nfound the flanking piece North East";
+            return true;
+        }
+        posNE = posNE - 7;
+    }
 
-//                SE
+    //check E
+    pieceCount = 0;
+    loop = true;
+    while(loop){
+        std::cout << "\n\nChecking E: " << boardPositions[posE].getPiece();
+        if(boardPositions[posE].getPiece() == '.'){loop = false;}
+        if(boardPositions[posE].getPiece() == oppoPiece){pieceCount++;}
+        if(boardPositions[posE].getPiece() == selfPiece && pieceCount > 0){
+            std::cout << "\n\nfound the flanking piece in the East";
+            return true;
+        }
+        posE = posE + 1;
+    }
 
-//                S
+    //check SE
+    pieceCount = 0;
+    loop = true;
+    while(loop){
+        std::cout << "\n\nChecking SE: " << boardPositions[posSE].getPiece();
+        if(boardPositions[posSE].getPiece() == '.'){loop = false;}
+        if(boardPositions[posSE].getPiece() == oppoPiece){pieceCount++;}
+        if(boardPositions[posSE].getPiece() == selfPiece && pieceCount > 0){
+            std::cout << "\n\nfound the flanking piece in the South East";
+            return true;
+        }
+        posSE = posSE + 9;
+    }
 
-//                SW
 
-//                W
+    //check S
+    pieceCount = 0;
+    loop = true;
+    while(loop){
+        std::cout << "\n\nChecking S: " << boardPositions[posS].getPiece();
+        if(boardPositions[posS].getPiece() == '.'){loop = false;}
+        if(boardPositions[posS].getPiece() == oppoPiece){pieceCount++;}
+        if(boardPositions[posS].getPiece() == selfPiece && pieceCount > 0){
+            std::cout << "\n\nfound the flanking piece in the south";
+            return true;
+        }
+        posS = posS + 8;
+    }
 
-//                NW
+    //check SW
+    pieceCount = 0;
+    loop = true;
+    while(loop){
+        std::cout << "\n\nChecking SW: " << boardPositions[posSW].getPiece();
+        if(boardPositions[posSW].getPiece() == '.'){loop = false;}
+        if(boardPositions[posSW].getPiece() == oppoPiece){pieceCount++;}
+        if(boardPositions[posSW].getPiece() == selfPiece && pieceCount > 0){
+            std::cout << "\n\nfound the flanking piece in the south west";
+            return true;
+        }
+        posSW = posSW + 7;
+    }
+
+    //check W
+    pieceCount = 0;
+    loop = true;
+    while(loop){
+        std::cout << "\n\nChecking W: " << boardPositions[posW].getPiece();
+        if(boardPositions[posW].getPiece() == '.'){loop = false;}
+        if(boardPositions[posW].getPiece() == oppoPiece){pieceCount++;}
+        if(boardPositions[posW].getPiece() == selfPiece && pieceCount > 0){
+            std::cout << "\n\nfound the flanking piece in the west";
+            return true;
+        }
+        posW = posW - 1;
+    }
+
+    //check NW
+    pieceCount = 0;
+    loop = true;
+    while(loop){
+        std::cout << "\n\nChecking NW: " << boardPositions[posNW].getPiece();
+        if(boardPositions[posNW].getPiece() == '.'){loop = false;}
+        if(boardPositions[posNW].getPiece() == oppoPiece){pieceCount++;}
+        if(boardPositions[posNW].getPiece() == selfPiece && pieceCount > 0){
+            std::cout << "\n\nfound the flanking piece in the North West";
+            return true;
+        }
+        posNW = posNW - 9;
+    }
 }
+
 void Board::setPlayerOne(Player p)
 {
     first = p;

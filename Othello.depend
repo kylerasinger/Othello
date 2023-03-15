@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1678754344 source:c:\users\kyler\onedrive\desktop\programming\othello_game\othello\main.cpp
+1678900896 source:c:\users\kyler\onedrive\desktop\programming\othello_game\othello\main.cpp
 	<iostream>
 	"Board.h"
 	"Game.h"
@@ -11,7 +11,7 @@
 	<string>
 	<algorithm>
 
-1678812298 source:c:\users\kyler\onedrive\desktop\programming\othello_game\othello\board.cpp
+1678903873 source:c:\users\kyler\onedrive\desktop\programming\othello_game\othello\board.cpp
 	"Board.h"
 	<iostream>
 	<fstream>
