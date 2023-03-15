@@ -1,6 +1,8 @@
 //Kyle Rasinger, 40247163
 //March 8th 2023
 
+//left off on finishing checkMove(). still need it to requeue input.
+
 #include <iostream>
 #include "Board.h"
 #include "Game.h"
