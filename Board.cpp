@@ -137,17 +137,21 @@ Board::Board(std::string save_file)
 
 void Board::play()
 {
-    std::cout << "\n\n\nNEW TURN\n\n\n";
     system("CLS");
     { //win condition checker
+        int temp;
         int counter = 64;
+        int whiteCounter = 0;
+        int blackCounter = 0;
         for(int i = 0; i < 64; i++){
-            if(boardPositions[i].getPiece() == '.'){
-                counter--;
-            }
+            if(boardPositions[i].getPiece() == '.'){counter--;}
+            if(boardPositions[i].getPiece() == 'B'){blackCounter++;}
+            if(boardPositions[i].getPiece() == 'W'){whiteCounter++;}
+            //std::cout << "blackCounter: " << blackCounter << "\nwhiteCounter: " << whiteCounter;
+            //std::cin >> temp;
         }
 
-        if(counter == 0){ //all positions are full
+        if(counter == 0 || blackCounter == 0 || whiteCounter == 0){ //all positions are full
             //count for winner
             int counterB = 0;
             int counterW = 0;
@@ -161,13 +165,29 @@ void Board::play()
                     counterW++;
                 }
             }
-
+            char saveDecision;
             if(counterB > counterW){
                 std::cout << "BLACK IS THE WINNER.\n ";
+                drawBoard();
+                std::cout << "\nWould you like to save the game? (y/n): ";
+                std::cin >> saveDecision;
+                if(saveDecision == 'y'){save();}
+                exit(0);
+
             }else if(counterW > counterB){
                 std::cout << "WHITE IS THE WINNER.\n ";
+                drawBoard();
+                std::cout << "\nWould you like to save the game? (y/n): ";
+                std::cin >> saveDecision;
+                if(saveDecision == 'y'){save();}
+                exit(0);
             }else if(counterW == counterB) {
                 std::cout << "THE GAME IS A DRAW.\n ";
+                drawBoard();
+                std::cout << "\nWould you like to save the game? (y/n): ";
+                std::cin >> saveDecision;
+                if(saveDecision == 'y'){save();}
+                exit(0);
             }
         }
     }
@@ -197,7 +217,7 @@ void Board::play()
                     flag = 0;
                     indexY = 0;
                     indexX = 0;
-                    std::cout << "Enter your move (horizontal index, vertical index): ";
+                    std::cout << "\nEnter your move (horizontal index, vertical index): ";
                     std::cin >> indexX;
                     std::cin >> indexY;
                     indexX = indexX - 48;
@@ -213,6 +233,7 @@ void Board::play()
                     if(indexFinal < 0){flag = 2;}
                     if(boardPositions[indexFinal].canPlay() == false){flag = 3;}
                     if(checkMove(indexFinal) == false) {flag = 4;}
+
                 }while(flag != 0);
 
                 boardPositions[indexFinal].setPiece(Position::BLACK);
@@ -551,6 +572,7 @@ bool Board::checkMove(int pos)
     loop = true;
     while(loop){
         //std::cout << "\n\nChecking N: " << boardPositions[posN].getPiece();
+        if(posN < 0 || posN > 63){loop = false; break;}
         if(boardPositions[posN].getPiece() == '.'){loop = false;}
         if(boardPositions[posN].getPiece() == oppoPiece){pieceCount++;}
         if(boardPositions[posN].getPiece() == selfPiece && pieceCount > 0){
@@ -602,7 +624,6 @@ bool Board::checkMove(int pos)
         posSE = posSE + 9;
     }
 
-
     //check S
     pieceCount = 0;
     loop = true;
@@ -650,6 +671,7 @@ bool Board::checkMove(int pos)
     loop = true;
     while(loop){
         //std::cout << "\n\nChecking NW: " << boardPositions[posNW].getPiece();
+        if(posN < 0 || posNW > 63){loop = false; break;}
         if(boardPositions[posNW].getPiece() == '.'){loop = false;}
         if(boardPositions[posNW].getPiece() == oppoPiece){pieceCount++;}
         if(boardPositions[posNW].getPiece() == selfPiece && pieceCount > 0){
@@ -658,7 +680,6 @@ bool Board::checkMove(int pos)
         }
         posNW = posNW - 9;
     }
-
     //if no loops catch a flank, return false.
     return false;
 }

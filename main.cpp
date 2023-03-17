@@ -1,7 +1,7 @@
 //Kyle Rasinger, 40247163
 //March 8th 2023
 
-//left off on finishing checkMove(). still need it to requeue input.
+//left off fixing checkMove(int). crashes when on top line
 
 #include <iostream>
 #include "Board.h"

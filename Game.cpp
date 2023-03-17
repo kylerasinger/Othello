@@ -30,7 +30,7 @@ Game::Game(Player p1, Player p2)
 
 }
 
-void Game::start() //holds game loop?
+void Game::start() //holds game loop
 {
     bool quitGame = false;
     while(!quitGame)
