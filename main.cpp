@@ -1,7 +1,7 @@
 //Kyle Rasinger, 40247163
 //March 8th 2023
 
-//left off fixing checkMove(int). crashes when on top line
+//left off fixing checkMove(int). crashes when on top line. crash from checking north east direction
 
 #include <iostream>
 #include "Board.h"
