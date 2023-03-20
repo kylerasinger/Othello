@@ -195,6 +195,8 @@ void Board::play()
 
     Board::drawBoard();
 
+    int emptyValue;
+
     int input;
     std::cout << "\n\nIt is " << current.getName() << "'s turn.";
     if(current.getName() == first.getName()){std::cout << "\nPlace a BLACK (B) token. ";}
@@ -239,6 +241,10 @@ void Board::play()
                 boardPositions[indexFinal].setPiece(Position::BLACK);
 
                 makeMove(indexFinal);
+
+                std::cout << "\nindexFinal: " << indexFinal;
+                std::cout << "\n";
+                system("pause");
 
                 takeTurn();
                 break;
@@ -355,6 +361,8 @@ void Board::makeMove(int pos)
     loop2 = true;
     while(loop){
         //std::cout << "\n\nChecking N: " << boardPositions[posN].getPiece();
+
+
         if(boardPositions[posN].getPiece() == '.'){loop = false;}
         if(boardPositions[posN].getPiece() == oppoPiece){pieceCount++;}
         if(boardPositions[posN].getPiece() == selfPiece && pieceCount > 0){
@@ -364,7 +372,7 @@ void Board::makeMove(int pos)
                 if(boardPositions[posN].getPiece() == oppoPiece){
                     boardPositions[posN].setPiece(selfPiece);
                 }else{
-                    boardPositions[posN].setPiece(selfPiece);
+                    //boardPositions[posN].setPiece(selfPiece);
                     loop2 = false;
                 }
             }
@@ -388,7 +396,7 @@ void Board::makeMove(int pos)
                 if(boardPositions[posNE].getPiece() == oppoPiece){
                     boardPositions[posNE].setPiece(selfPiece);
                 }else{
-                    boardPositions[posNE].setPiece(selfPiece);
+                    //boardPositions[posNE].setPiece(selfPiece);
                     loop2 = false;
                 }
             }
@@ -397,10 +405,15 @@ void Board::makeMove(int pos)
     }
 
     //place E
+    int initialRowE = (pos+1)/8;
+    int newRowE;
     pieceCount = 0;
     loop = true;
     loop2 = true;
     while(loop){
+        //std::cout << "\nInitial Row: " << initialRowE;
+        //newRowE = (posE+1) / 8;
+        //std::cout << "\nNew Row: " << newRowE;
         //std::cout << "\n\nChecking NE: " << boardPositions[posN].getPiece();
         if(boardPositions[posE].getPiece() == '.'){loop = false;}
         if(boardPositions[posE].getPiece() == oppoPiece){pieceCount++;}
@@ -411,7 +424,7 @@ void Board::makeMove(int pos)
                 if(boardPositions[posE].getPiece() == oppoPiece){
                     boardPositions[posE].setPiece(selfPiece);
                 }else{
-                    boardPositions[posE].setPiece(selfPiece);
+                    //boardPositions[posE].setPiece(selfPiece);
                     loop2 = false;
                 }
             }
@@ -434,7 +447,7 @@ void Board::makeMove(int pos)
                 if(boardPositions[posSE].getPiece() == oppoPiece){
                     boardPositions[posSE].setPiece(selfPiece);
                 }else{
-                    boardPositions[posSE].setPiece(selfPiece);
+                    //boardPositions[posSE].setPiece(selfPiece);
                     loop2 = false;
                 }
             }
@@ -457,7 +470,7 @@ void Board::makeMove(int pos)
                 if(boardPositions[posS].getPiece() == oppoPiece){
                     boardPositions[posS].setPiece(selfPiece);
                 }else{
-                    boardPositions[posS].setPiece(selfPiece);
+                    //boardPositions[posS].setPiece(selfPiece);
                     loop2 = false;
                 }
             }
@@ -480,7 +493,7 @@ void Board::makeMove(int pos)
                 if(boardPositions[posSW].getPiece() == oppoPiece){
                     boardPositions[posSW].setPiece(selfPiece);
                 }else{
-                    boardPositions[posSW].setPiece(selfPiece);
+                    //boardPositions[posSW].setPiece(selfPiece);
                     loop2 = false;
                 }
             }
@@ -503,7 +516,7 @@ void Board::makeMove(int pos)
                 if(boardPositions[posW].getPiece() == oppoPiece){
                     boardPositions[posW].setPiece(selfPiece);
                 }else{
-                    boardPositions[posW].setPiece(selfPiece);
+                    //boardPositions[posW].setPiece(selfPiece);
                     loop2 = false;
                 }
             }
@@ -526,7 +539,7 @@ void Board::makeMove(int pos)
                 if(boardPositions[posNW].getPiece() == oppoPiece){
                     boardPositions[posNW].setPiece(selfPiece);
                 }else{
-                    boardPositions[posNW].setPiece(selfPiece);
+                    //boardPositions[posNW].setPiece(selfPiece);
                     loop2 = false;
                 }
             }
