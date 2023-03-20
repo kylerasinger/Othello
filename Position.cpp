@@ -1,4 +1,5 @@
 #include "Position.h"
+#include "Board.h"
 
 Position::Position()
 {
@@ -10,7 +11,7 @@ Position::~Position()
     //dtor
 }
 
-bool Position::canPlay()
+bool Position::canPlayOld()
 {
     if(piece == '.')
     {
@@ -19,6 +20,17 @@ bool Position::canPlay()
         return false;
     }
 
+}
+
+bool Position::canPlay(int index)
+{
+    /*
+    if(piece == EMPTY && Board::checkMove(index) == true)
+    {
+        return true;
+    }else if(Board::checkMove(index) == false){
+        return false;
+    }*/
 }
 
 void Position::setPiece(char n)

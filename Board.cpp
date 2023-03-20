@@ -209,6 +209,29 @@ void Board::play()
     std::cin >> input;
         switch(input){
             case 1:{ //1. Move
+                //rewrite board with playable positions
+                system("CLS");
+                for(int i = 0; i < 64; i++){
+                    if(boardPositions[i].getPiece() != 'W' && boardPositions[i].getPiece() != 'B'){
+                        if(checkMove(i) == false){
+                            boardPositions[i].setPiece('*');
+                        }
+                    }
+                }
+                system("CLS");
+                drawBoard();
+
+                std::cout << "\n\nIt is " << current.getName() << "'s turn.";
+                if(current.getName() == first.getName()){std::cout << "\nPlace a BLACK (B) token. ";}
+                else if(current.getName() == second.getName()){std::cout << "\nPlace a WHITE (W) token. ";}
+                std::cout << "\n\t1. Move\n\t2. Save\n\t3. Concede the game (loser)\n\t4. Forfeit your turn\n";
+
+                for(int i = 0; i < 64; i++){
+                    if(boardPositions[i].getPiece() == '*'){
+                        boardPositions[i].setPiece('.');
+                    }
+                }
+
                 again = false;
                 int indexY;
                 char indexX;
@@ -233,7 +256,7 @@ void Board::play()
                     //illegal conditions
                     if(indexFinal > 63){flag = 1;}
                     if(indexFinal < 0){flag = 2;}
-                    if(boardPositions[indexFinal].canPlay() == false){flag = 3;}
+                    if(boardPositions[indexFinal].canPlayOld() == false){flag = 3;}
                     std::cout << "Dies on checkMove() ";
                     if(checkMove(indexFinal) == false) {flag = 4;}
                     std::cout << "Doesn't die on checkMove() ";
@@ -336,6 +359,7 @@ void Board::setBoardPositions(std::string s)
     {
         Board::boardPositions[i].setPiece(s[i]);
     }
+
 }
 
 void Board::makeMove(int pos)
@@ -557,7 +581,6 @@ void Board::makeMove(int pos)
         }
         posNW = posNW - 9;
     }
-
 }
 
 //getters and setters
@@ -592,7 +615,7 @@ bool Board::checkMove(int pos)
     short pieceCount = 0;
 
     //check N
-    std::cout << "\nDies on north";
+    //std::cout << "\nDies on north";
     pieceCount = 0;
     loop = true;
     while(loop){
@@ -607,11 +630,10 @@ bool Board::checkMove(int pos)
         posN = posN - 8;
     }
 
-    std::cout << "\nDies on north east";
+    //std::cout << "\nDies on north east";
     //check NE
     pieceCount = 0;
     loop = true;
-
     while(loop){
         if(posNE < 0 || posNE > 63){break;}
         //std::cout << "\n\nChecking NE: " << boardPositions[posNE].getPiece();
@@ -624,7 +646,7 @@ bool Board::checkMove(int pos)
         posNE = posNE - 7;
     }
 
-    std::cout << "\nDies on east";
+    //std::cout << "\nDies on east";
     //check E
     pieceCount = 0;
     loop = true;
@@ -640,7 +662,7 @@ bool Board::checkMove(int pos)
         posE = posE + 1;
     }
 
-    std::cout << "\nDies on south east";
+    //std::cout << "\nDies on south east";
     //check SE
     pieceCount = 0;
     loop = true;
@@ -656,7 +678,7 @@ bool Board::checkMove(int pos)
         posSE = posSE + 9;
     }
 
-    std::cout << "\nDies on south";
+    //std::cout << "\nDies on south";
     //check S
     pieceCount = 0;
     loop = true;
@@ -672,7 +694,7 @@ bool Board::checkMove(int pos)
         posS = posS + 8;
     }
 
-    std::cout << "\nDies on south west";
+    //std::cout << "\nDies on south west";
     //check SW
     pieceCount = 0;
     loop = true;
@@ -703,13 +725,13 @@ bool Board::checkMove(int pos)
         posW = posW - 1;
     }
 
-    std::cout << "\nDies on north west";
+    //std::cout << "\nDies on north west";
     //check NW
     pieceCount = 0;
     loop = true;
     while(loop){
         //std::cout << "\n\nChecking NW: " << boardPositions[posNW].getPiece();
-        if(posN < 0 || posNW > 63){loop = false; break;}
+        if(posNW < 0 || posNW > 63){break;}
         if(boardPositions[posNW].getPiece() == '.'){loop = false;}
         if(boardPositions[posNW].getPiece() == oppoPiece){pieceCount++;}
         if(boardPositions[posNW].getPiece() == selfPiece && pieceCount > 0){

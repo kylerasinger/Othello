@@ -1,7 +1,11 @@
 //Kyle Rasinger, 40247163
 //March 8th 2023
 
-//left off fixing checkMove(int). crashes when on top line. crash from checking north east direction
+//left off on:
+//bug: checkMove() and makeMove() go across side borders
+//feature: need to show playable and unplayable positions when selecting.
+    //can scan using checkMove() across the entire board, and if checkMove() == true then '.'. If false then
+    //place either the piece in its position back in the board or if it was empty, put '*'.
 
 #include <iostream>
 #include "Board.h"

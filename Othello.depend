@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1679337088 source:c:\users\kyler\onedrive\desktop\programming\othello_game\othello\main.cpp
+1679339122 source:c:\users\kyler\onedrive\desktop\programming\othello_game\othello\main.cpp
 	<iostream>
 	"Board.h"
 	"Game.h"
@@ -11,7 +11,7 @@
 	<string>
 	<algorithm>
 
-1679338678 source:c:\users\kyler\onedrive\desktop\programming\othello_game\othello\board.cpp
+1679340908 source:c:\users\kyler\onedrive\desktop\programming\othello_game\othello\board.cpp
 	"Board.h"
 	<iostream>
 	<fstream>
@@ -33,10 +33,11 @@
 1678735478 c:\users\kyler\onedrive\desktop\programming\othello_game\othello\player.h
 	<iostream>
 
-1678812258 source:c:\users\kyler\onedrive\desktop\programming\othello_game\othello\position.cpp
+1679340447 source:c:\users\kyler\onedrive\desktop\programming\othello_game\othello\position.cpp
 	"Position.h"
+	"Board.h"
 
-1678814627 c:\users\kyler\onedrive\desktop\programming\othello_game\othello\position.h
+1679340470 c:\users\kyler\onedrive\desktop\programming\othello_game\othello\position.h
 
 1679064750 source:c:\users\kyler\onedrive\desktop\programming\othello_game\othello\game.cpp
 	"Game.h"
