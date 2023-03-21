@@ -257,19 +257,15 @@ void Board::play()
                     if(indexFinal > 63){flag = 1;}
                     if(indexFinal < 0){flag = 2;}
                     if(boardPositions[indexFinal].canPlayOld() == false){flag = 3;}
-                    std::cout << "Dies on checkMove() ";
+                    //std::cout << "Dies on checkMove() ";
                     if(checkMove(indexFinal) == false) {flag = 4;}
-                    std::cout << "Doesn't die on checkMove() ";
+                    //std::cout << "Doesn't die on checkMove() ";
 
                 }while(flag != 0);
 
                 boardPositions[indexFinal].setPiece(Position::BLACK);
 
                 makeMove(indexFinal);
-
-                std::cout << "\nindexFinal: " << indexFinal;
-                std::cout << "\n";
-                system("pause");
 
                 takeTurn();
                 break;
@@ -648,10 +644,15 @@ bool Board::checkMove(int pos)
 
     //std::cout << "\nDies on east";
     //check E
+    int initialRowE = (pos)/8;
+    int newRowE = (posE)/8;
     pieceCount = 0;
     loop = true;
     while(loop){
+        std::cout << "\ninitialRowE: " << initialRowE << " | newRowE: " << newRowE << "\n\n";
+        //system("pause");
         if(posE < 0 || posE > 63){break;}
+        if(initialRowE != newRowE){loop = false; break;}
         //std::cout << "\n\nChecking E: " << boardPositions[posE].getPiece();
         if(boardPositions[posE].getPiece() == '.'){loop = false;}
         if(boardPositions[posE].getPiece() == oppoPiece){pieceCount++;}
@@ -660,6 +661,7 @@ bool Board::checkMove(int pos)
             return true;
         }
         posE = posE + 1;
+        newRowE = (posE)/8;
     }
 
     //std::cout << "\nDies on south east";
@@ -711,10 +713,13 @@ bool Board::checkMove(int pos)
     }
 
     //check W
+    int initialRowW = (pos)/8;
+    int newRowW = (posW)/8;
     pieceCount = 0;
     loop = true;
     while(loop){
         if(posW < 0 || posW > 63){break;}
+        if(initialRowW != newRowW){loop = false; break;}
         //std::cout << "\n\nChecking W: " << boardPositions[posW].getPiece();
         if(boardPositions[posW].getPiece() == '.'){loop = false;}
         if(boardPositions[posW].getPiece() == oppoPiece){pieceCount++;}
@@ -723,6 +728,7 @@ bool Board::checkMove(int pos)
             return true;
         }
         posW = posW - 1;
+        newRowW = (posW)/8;
     }
 
     //std::cout << "\nDies on north west";
