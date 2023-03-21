@@ -437,9 +437,6 @@ void Board::makeMove(int pos)
     loop2 = true;
     while(loop){
         if(posE < 0 || posE > 63){break;}
-        //std::cout << "\nInitial Row: " << initialRowE;
-        //newRowE = (posE+1) / 8;
-        //std::cout << "\nNew Row: " << newRowE;
         //std::cout << "\n\nChecking NE: " << boardPositions[posN].getPiece();
         if(boardPositions[posE].getPiece() == '.'){loop = false;}
         if(boardPositions[posE].getPiece() == oppoPiece){pieceCount++;}
@@ -628,10 +625,15 @@ bool Board::checkMove(int pos)
 
     //std::cout << "\nDies on north east";
     //check NE
+    int initialRowNE = (pos)/8;
+    int newRowNE = (posNE)/8;
+    int diffNE = 0;
     pieceCount = 0;
     loop = true;
     while(loop){
+        diffNE = initialRowNE - newRowNE;
         if(posNE < 0 || posNE > 63){break;}
+        if(diffNE != -1){loop = false; break;}
         //std::cout << "\n\nChecking NE: " << boardPositions[posNE].getPiece();
         if(boardPositions[posNE].getPiece() == '.'){loop = false;}
         if(boardPositions[posNE].getPiece() == oppoPiece){pieceCount++;}
@@ -640,6 +642,7 @@ bool Board::checkMove(int pos)
             return true;
         }
         posNE = posNE - 7;
+        newRowNE = (posNE)/8;
     }
 
     //std::cout << "\nDies on east";
@@ -649,7 +652,6 @@ bool Board::checkMove(int pos)
     pieceCount = 0;
     loop = true;
     while(loop){
-        std::cout << "\ninitialRowE: " << initialRowE << " | newRowE: " << newRowE << "\n\n";
         //system("pause");
         if(posE < 0 || posE > 63){break;}
         if(initialRowE != newRowE){loop = false; break;}
@@ -666,10 +668,15 @@ bool Board::checkMove(int pos)
 
     //std::cout << "\nDies on south east";
     //check SE
+    int initialRowSE = (pos)/8;
+    int newRowSE = (posSE)/8;
+    int diffSE = 0;
     pieceCount = 0;
     loop = true;
     while(loop){
+        diffSE = initialRowSE - newRowSE;
         if(posSE < 0 || posSE > 63){break;}
+        if(diffSE != 1){loop = false; break;}
         //std::cout << "\n\nChecking SE: " << boardPositions[posSE].getPiece();
         if(boardPositions[posSE].getPiece() == '.'){loop = false;}
         if(boardPositions[posSE].getPiece() == oppoPiece){pieceCount++;}
@@ -678,6 +685,7 @@ bool Board::checkMove(int pos)
             return true;
         }
         posSE = posSE + 9;
+        newRowSE = (posSE)/8;
     }
 
     //std::cout << "\nDies on south";
@@ -698,10 +706,15 @@ bool Board::checkMove(int pos)
 
     //std::cout << "\nDies on south west";
     //check SW
+    int initialRowSW = (pos)/8;
+    int newRowSW = (posSW)/8;
+    int diffSW = 0;
     pieceCount = 0;
     loop = true;
     while(loop){
+        diffSW = initialRowSW - newRowSW;
         if(posSW < 0 || posSW > 63){break;}
+        if(diffSW != 1){loop = false; break;}
         //std::cout << "\n\nChecking SW: " << boardPositions[posSW].getPiece();
         if(boardPositions[posSW].getPiece() == '.'){loop = false;}
         if(boardPositions[posSW].getPiece() == oppoPiece){pieceCount++;}
@@ -710,6 +723,7 @@ bool Board::checkMove(int pos)
             return true;
         }
         posSW = posSW + 7;
+        newRowSW = (posSW)/8;
     }
 
     //check W
@@ -733,11 +747,16 @@ bool Board::checkMove(int pos)
 
     //std::cout << "\nDies on north west";
     //check NW
+    int initialRowNW = (pos)/8;
+    int newRowNW = (posNW)/8;
+    int diffNW = 0;
     pieceCount = 0;
     loop = true;
     while(loop){
+        diffNW = initialRowNW - newRowNW;
         //std::cout << "\n\nChecking NW: " << boardPositions[posNW].getPiece();
         if(posNW < 0 || posNW > 63){break;}
+        if(diffNW != -1){loop = false; break;}
         if(boardPositions[posNW].getPiece() == '.'){loop = false;}
         if(boardPositions[posNW].getPiece() == oppoPiece){pieceCount++;}
         if(boardPositions[posNW].getPiece() == selfPiece && pieceCount > 0){
@@ -745,6 +764,7 @@ bool Board::checkMove(int pos)
             return true;
         }
         posNW = posNW - 9;
+        newRowNW = (posNW)/8;
     }
     //if no loops catch a flank, return false.
     return false;
