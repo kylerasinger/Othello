@@ -167,7 +167,7 @@ void Board::play()
             }
             char saveDecision;
             if(counterB > counterW){
-                std::cout << "BLACK IS THE WINNER.\n ";
+                std::cout << "\nBLACK IS THE WINNER.\n\n ";
                 drawBoard();
                 std::cout << "\nWould you like to save the game? (y/n): ";
                 std::cin >> saveDecision;
@@ -175,7 +175,7 @@ void Board::play()
                 exit(0);
 
             }else if(counterW > counterB){
-                std::cout << "WHITE IS THE WINNER.\n ";
+                std::cout << "\nWHITE IS THE WINNER.\n\n ";
                 drawBoard();
                 std::cout << "\nWould you like to save the game? (y/n): ";
                 std::cin >> saveDecision;
@@ -205,6 +205,59 @@ void Board::play()
 
     bool again = true;
     while(again){
+        { //win condition checker
+        int temp;
+        int counter = 64;
+        int whiteCounter = 0;
+        int blackCounter = 0;
+        for(int i = 0; i < 64; i++){
+            if(boardPositions[i].getPiece() == '.'){counter--;}
+            if(boardPositions[i].getPiece() == 'B'){blackCounter++;}
+            if(boardPositions[i].getPiece() == 'W'){whiteCounter++;}
+            //std::cout << "blackCounter: " << blackCounter << "\nwhiteCounter: " << whiteCounter;
+            //std::cin >> temp;
+        }
+
+        if(counter == 0 || blackCounter == 0 || whiteCounter == 0){ //all positions are full
+            //count for winner
+            int counterB = 0;
+            int counterW = 0;
+
+            for(int i = 0; i < 64; i++){
+                if(boardPositions[i].getPiece() == 'B'){
+                    counterB++;
+                }
+
+                if(boardPositions[i].getPiece() == 'W'){
+                    counterW++;
+                }
+            }
+            char saveDecision;
+            if(counterB > counterW){
+                std::cout << "\nBLACK IS THE WINNER.\n\n ";
+                drawBoard();
+                std::cout << "\nWould you like to save the game? (y/n): ";
+                std::cin >> saveDecision;
+                if(saveDecision == 'y'){save();}
+                exit(0);
+
+            }else if(counterW > counterB){
+                std::cout << "\nWHITE IS THE WINNER.\n\n ";
+                drawBoard();
+                std::cout << "\nWould you like to save the game? (y/n): ";
+                std::cin >> saveDecision;
+                if(saveDecision == 'y'){save();}
+                exit(0);
+            }else if(counterW == counterB) {
+                std::cout << "THE GAME IS A DRAW.\n ";
+                drawBoard();
+                std::cout << "\nWould you like to save the game? (y/n): ";
+                std::cin >> saveDecision;
+                if(saveDecision == 'y'){save();}
+                exit(0);
+            }
+        }
+    }
     std::cout << "\n\t1. Move\n\t2. Save\n\t3. Concede the game (loser)\n\t4. Forfeit your turn\n";
     std::cin >> input;
         switch(input){
@@ -283,13 +336,13 @@ void Board::play()
 
                 if(strCurrent == str1)
                 {
-                    std::cout << "WHITE IS THE WINNER. " << str2;
+                    std::cout << str2 << " IS THE WINNER.\n";
                 }else if(strCurrent == str2)
                 {
-                    std::cout << "BLACK IS THE WINNER. " << str1;
+                    std::cout << str1 << " IS THE WINNER.\n";
                 }
                 char n;
-                std::cout << "Save the game? (y/n): ";
+                std::cout << "\nSave the game? (y/n): ";
                 std::cin >> n;
                 if(n == 'y'){
                     save();
