@@ -13,7 +13,7 @@ Position::~Position()
 
 bool Position::canPlayOld()
 {
-    if(piece == '.')
+    if(piece == EMPTY)
     {
         return true;
     }else{

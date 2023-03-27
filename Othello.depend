@@ -11,7 +11,7 @@
 	<string>
 	<algorithm>
 
-1679937916 source:c:\users\kyler\onedrive\desktop\programming\othello_game\othello\board.cpp
+1679945763 source:c:\users\kyler\onedrive\desktop\programming\othello_game\othello\board.cpp
 	"Board.h"
 	<iostream>
 	<fstream>
@@ -26,18 +26,18 @@
 	"Player.h"
 	"Position.h"
 
-1678735620 source:c:\users\kyler\onedrive\desktop\programming\othello_game\othello\player.cpp
+1679945763 source:c:\users\kyler\onedrive\desktop\programming\othello_game\othello\player.cpp
 	"Player.h"
 	<iostream>
 
 1678735478 c:\users\kyler\onedrive\desktop\programming\othello_game\othello\player.h
 	<iostream>
 
-1679340447 source:c:\users\kyler\onedrive\desktop\programming\othello_game\othello\position.cpp
+1679945807 source:c:\users\kyler\onedrive\desktop\programming\othello_game\othello\position.cpp
 	"Position.h"
 	"Board.h"
 
-1679340470 c:\users\kyler\onedrive\desktop\programming\othello_game\othello\position.h
+1679945865 c:\users\kyler\onedrive\desktop\programming\othello_game\othello\position.h
 
 1679064750 source:c:\users\kyler\onedrive\desktop\programming\othello_game\othello\game.cpp
 	"Game.h"

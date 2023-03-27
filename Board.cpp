@@ -144,9 +144,9 @@ void Board::play()
         int whiteCounter = 0;
         int blackCounter = 0;
         for(int i = 0; i < 64; i++){
-            if(boardPositions[i].getPiece() == '.'){counter--;}
-            if(boardPositions[i].getPiece() == 'B'){blackCounter++;}
-            if(boardPositions[i].getPiece() == 'W'){whiteCounter++;}
+            if(boardPositions[i].getPiece() == Position::EMPTY){counter--;}
+            if(boardPositions[i].getPiece() == Position::BLACK){blackCounter++;}
+            if(boardPositions[i].getPiece() == Position::WHITE){whiteCounter++;}
             //std::cout << "blackCounter: " << blackCounter << "\nwhiteCounter: " << whiteCounter;
             //std::cin >> temp;
         }
@@ -157,11 +157,11 @@ void Board::play()
             int counterW = 0;
 
             for(int i = 0; i < 64; i++){
-                if(boardPositions[i].getPiece() == 'B'){
+                if(boardPositions[i].getPiece() == Position::BLACK){
                     counterB++;
                 }
 
-                if(boardPositions[i].getPiece() == 'W'){
+                if(boardPositions[i].getPiece() == Position::WHITE){
                     counterW++;
                 }
             }
@@ -209,9 +209,9 @@ void Board::play()
         int whiteCounter = 0;
         int blackCounter = 0;
         for(int i = 0; i < 64; i++){
-            if(boardPositions[i].getPiece() == '.'){counter--;}
-            if(boardPositions[i].getPiece() == 'B'){blackCounter++;}
-            if(boardPositions[i].getPiece() == 'W'){whiteCounter++;}
+            if(boardPositions[i].getPiece() == Position::EMPTY){counter--;}
+            if(boardPositions[i].getPiece() == Position::BLACK){blackCounter++;}
+            if(boardPositions[i].getPiece() == Position::WHITE){whiteCounter++;}
             //std::cout << "blackCounter: " << blackCounter << "\nwhiteCounter: " << whiteCounter;
             //std::cin >> temp;
         }
@@ -222,11 +222,11 @@ void Board::play()
             int counterW = 0;
 
             for(int i = 0; i < 64; i++){
-                if(boardPositions[i].getPiece() == 'B'){
+                if(boardPositions[i].getPiece() == Position::BLACK){
                     counterB++;
                 }
 
-                if(boardPositions[i].getPiece() == 'W'){
+                if(boardPositions[i].getPiece() == Position::WHITE){
                     counterW++;
                 }
             }
@@ -263,7 +263,7 @@ void Board::play()
                 //rewrite board with playable positions
                 system("CLS");
                 for(int i = 0; i < 64; i++){
-                    if(boardPositions[i].getPiece() != 'W' && boardPositions[i].getPiece() != 'B'){
+                    if(boardPositions[i].getPiece() != Position::WHITE && boardPositions[i].getPiece() != Position::BLACK){
                         if(checkMove(i) == false){
                             boardPositions[i].setPiece('*');
                         }
@@ -278,8 +278,8 @@ void Board::play()
                 std::cout << "\n\t1. Move\n\t2. Save\n\t3. Concede the game (loser)\n\t4. Forfeit your turn\n";
 
                 for(int i = 0; i < 64; i++){
-                    if(boardPositions[i].getPiece() == '*'){
-                        boardPositions[i].setPiece('.');
+                    if(boardPositions[i].getPiece() == UnplayablePosition::UNPLAYABLE){
+                        boardPositions[i].setPiece(Position::EMPTY);
                     }
                 }
 
@@ -418,8 +418,8 @@ void Board::makeMove(int pos)
     bool loop2 = true;
     char selfPiece;
     char oppoPiece;
-    if(current.getName() == first.getName()){selfPiece = 'B'; oppoPiece = 'W';}
-    if(current.getName() == second.getName()){selfPiece = 'W'; oppoPiece = 'B';}
+    if(current.getName() == first.getName()){selfPiece = Position::BLACK; oppoPiece = Position::WHITE;}
+    if(current.getName() == second.getName()){selfPiece = Position::WHITE; oppoPiece = Position::BLACK;}
 
     int posN = pos - 8;
     int posNE = pos - 7;
@@ -441,7 +441,7 @@ void Board::makeMove(int pos)
         if(posN < 0 || posN > 63){break;}
         //std::cout << "\n\nChecking N: " << boardPositions[posN].getPiece();
 
-        if(boardPositions[posN].getPiece() == '.'){loop = false;}
+        if(boardPositions[posN].getPiece() == Position::EMPTY){loop = false;}
         if(boardPositions[posN].getPiece() == oppoPiece){pieceCount++;}
         if(boardPositions[posN].getPiece() == selfPiece && pieceCount > 0){
             //std::cout << "\n\nfound the flanking piece in the North\n\n";
@@ -466,7 +466,7 @@ void Board::makeMove(int pos)
     while(loop){
         if(posNE < 0 || posNE > 63){break;}
         //std::cout << "\n\nChecking NE: " << boardPositions[posN].getPiece();
-        if(boardPositions[posNE].getPiece() == '.'){loop = false;}
+        if(boardPositions[posNE].getPiece() == Position::EMPTY){loop = false;}
         if(boardPositions[posNE].getPiece() == oppoPiece){pieceCount++;}
         if(boardPositions[posNE].getPiece() == selfPiece && pieceCount > 0){
             //std::cout << "\n\nfound the flanking piece in the North East\n\n";
@@ -492,7 +492,7 @@ void Board::makeMove(int pos)
     while(loop){
         if(posE < 0 || posE > 63){break;}
         //std::cout << "\n\nChecking NE: " << boardPositions[posN].getPiece();
-        if(boardPositions[posE].getPiece() == '.'){loop = false;}
+        if(boardPositions[posE].getPiece() == Position::EMPTY){loop = false;}
         if(boardPositions[posE].getPiece() == oppoPiece){pieceCount++;}
         if(boardPositions[posE].getPiece() == selfPiece && pieceCount > 0){
             //std::cout << "\n\nfound the flanking piece in the East\n\n";
@@ -516,7 +516,7 @@ void Board::makeMove(int pos)
     while(loop){
         if(posSE < 0 || posSE > 63){break;}
         //std::cout << "\n\nChecking NE: " << boardPositions[posN].getPiece();
-        if(boardPositions[posSE].getPiece() == '.'){loop = false;}
+        if(boardPositions[posSE].getPiece() == Position::EMPTY){loop = false;}
         if(boardPositions[posSE].getPiece() == oppoPiece){pieceCount++;}
         if(boardPositions[posSE].getPiece() == selfPiece && pieceCount > 0){
             //std::cout << "\n\nfound the flanking piece in the South East\n\n";
@@ -540,7 +540,7 @@ void Board::makeMove(int pos)
     while(loop){
         if(posS < 0 || posS > 63){break;}
         //std::cout << "\n\nChecking NE: " << boardPositions[posN].getPiece();
-        if(boardPositions[posS].getPiece() == '.'){loop = false;}
+        if(boardPositions[posS].getPiece() == Position::EMPTY){loop = false;}
         if(boardPositions[posS].getPiece() == oppoPiece){pieceCount++;}
         if(boardPositions[posS].getPiece() == selfPiece && pieceCount > 0){
             //std::cout << "\n\nfound the flanking piece in the South East\n\n";
@@ -564,7 +564,7 @@ void Board::makeMove(int pos)
     while(loop){
         if(posSW < 0 || posSW > 63){break;}
         //std::cout << "\n\nChecking NE: " << boardPositions[posN].getPiece();
-        if(boardPositions[posSW].getPiece() == '.'){loop = false;}
+        if(boardPositions[posSW].getPiece() == Position::EMPTY){loop = false;}
         if(boardPositions[posSW].getPiece() == oppoPiece){pieceCount++;}
         if(boardPositions[posSW].getPiece() == selfPiece && pieceCount > 0){
             //std::cout << "\n\nfound the flanking piece in the South East\n\n";
@@ -588,7 +588,7 @@ void Board::makeMove(int pos)
     while(loop){
         if(posW < 0 || posW > 63){break;}
         //std::cout << "\n\nChecking NE: " << boardPositions[posN].getPiece();
-        if(boardPositions[posW].getPiece() == '.'){loop = false;}
+        if(boardPositions[posW].getPiece() == Position::EMPTY){loop = false;}
         if(boardPositions[posW].getPiece() == oppoPiece){pieceCount++;}
         if(boardPositions[posW].getPiece() == selfPiece && pieceCount > 0){
             //std::cout << "\n\nfound the flanking piece in the South East\n\n";
@@ -612,7 +612,7 @@ void Board::makeMove(int pos)
     while(loop){
         if(posNW < 0 || posNW > 63){break;}
         //std::cout << "\n\nChecking NE: " << boardPositions[posN].getPiece();
-        if(boardPositions[posNW].getPiece() == '.'){loop = false;}
+        if(boardPositions[posNW].getPiece() == Position::EMPTY){loop = false;}
         if(boardPositions[posNW].getPiece() == oppoPiece){pieceCount++;}
         if(boardPositions[posNW].getPiece() == selfPiece && pieceCount > 0){
             //std::cout << "\n\nfound the flanking piece in the South East\n\n";
@@ -648,8 +648,8 @@ bool Board::checkMove(int pos)
     bool loop = true;
     char selfPiece;
     char oppoPiece;
-    if(current.getName() == first.getName()){selfPiece = 'B'; oppoPiece = 'W';}
-    if(current.getName() == second.getName()){selfPiece = 'W'; oppoPiece = 'B';}
+    if(current.getName() == first.getName()){selfPiece = Position::BLACK; oppoPiece = Position::WHITE;}
+    if(current.getName() == second.getName()){selfPiece = Position::WHITE; oppoPiece = Position::BLACK;}
 
     int posN = pos - 8;
     int posNE = pos - 7;
@@ -668,7 +668,7 @@ bool Board::checkMove(int pos)
     while(loop){
         //std::cout << "\n\nChecking N: " << boardPositions[posN].getPiece();
         if(posN < 0 || posN > 63){loop = false; break;}
-        if(boardPositions[posN].getPiece() == '.'){loop = false;}
+        if(boardPositions[posN].getPiece() == Position::EMPTY){loop = false;}
         if(boardPositions[posN].getPiece() == oppoPiece){pieceCount++;}
         if(boardPositions[posN].getPiece() == selfPiece && pieceCount > 0){
             //std::cout << "\n\nfound the flanking piece in the North\n\n";
@@ -689,7 +689,7 @@ bool Board::checkMove(int pos)
         if(posNE < 0 || posNE > 63){break;}
         if(diffNE != -1){loop = false; break;}
         //std::cout << "\n\nChecking NE: " << boardPositions[posNE].getPiece();
-        if(boardPositions[posNE].getPiece() == '.'){loop = false;}
+        if(boardPositions[posNE].getPiece() == Position::EMPTY){loop = false;}
         if(boardPositions[posNE].getPiece() == oppoPiece){pieceCount++;}
         if(boardPositions[posNE].getPiece() == selfPiece && pieceCount > 0){
             //std::cout << "\n\nfound the flanking piece North East";
@@ -710,7 +710,7 @@ bool Board::checkMove(int pos)
         if(posE < 0 || posE > 63){break;}
         if(initialRowE != newRowE){loop = false; break;}
         //std::cout << "\n\nChecking E: " << boardPositions[posE].getPiece();
-        if(boardPositions[posE].getPiece() == '.'){loop = false;}
+        if(boardPositions[posE].getPiece() == Position::EMPTY){loop = false;}
         if(boardPositions[posE].getPiece() == oppoPiece){pieceCount++;}
         if(boardPositions[posE].getPiece() == selfPiece && pieceCount > 0){
             //std::cout << "\n\nfound the flanking piece in the East";
@@ -732,7 +732,7 @@ bool Board::checkMove(int pos)
         if(posSE < 0 || posSE > 63){break;}
         if(diffSE != 1){loop = false; break;}
         //std::cout << "\n\nChecking SE: " << boardPositions[posSE].getPiece();
-        if(boardPositions[posSE].getPiece() == '.'){loop = false;}
+        if(boardPositions[posSE].getPiece() == Position::EMPTY){loop = false;}
         if(boardPositions[posSE].getPiece() == oppoPiece){pieceCount++;}
         if(boardPositions[posSE].getPiece() == selfPiece && pieceCount > 0){
             //std::cout << "\n\nfound the flanking piece in the South East";
@@ -749,7 +749,7 @@ bool Board::checkMove(int pos)
     while(loop){
         if(posS < 0 || posS > 63){break;}
         //std::cout << "\n\nChecking S: " << boardPositions[posS].getPiece();
-        if(boardPositions[posS].getPiece() == '.'){loop = false;}
+        if(boardPositions[posS].getPiece() == Position::EMPTY){loop = false;}
         if(boardPositions[posS].getPiece() == oppoPiece){pieceCount++;}
         if(boardPositions[posS].getPiece() == selfPiece && pieceCount > 0){
             //std::cout << "\n\nfound the flanking piece in the south";
@@ -770,7 +770,7 @@ bool Board::checkMove(int pos)
         if(posSW < 0 || posSW > 63){break;}
         if(diffSW != 1){loop = false; break;}
         //std::cout << "\n\nChecking SW: " << boardPositions[posSW].getPiece();
-        if(boardPositions[posSW].getPiece() == '.'){loop = false;}
+        if(boardPositions[posSW].getPiece() == Position::EMPTY){loop = false;}
         if(boardPositions[posSW].getPiece() == oppoPiece){pieceCount++;}
         if(boardPositions[posSW].getPiece() == selfPiece && pieceCount > 0){
             //std::cout << "\n\nfound the flanking piece in the south west";
@@ -789,7 +789,7 @@ bool Board::checkMove(int pos)
         if(posW < 0 || posW > 63){break;}
         if(initialRowW != newRowW){loop = false; break;}
         //std::cout << "\n\nChecking W: " << boardPositions[posW].getPiece();
-        if(boardPositions[posW].getPiece() == '.'){loop = false;}
+        if(boardPositions[posW].getPiece() == Position::EMPTY){loop = false;}
         if(boardPositions[posW].getPiece() == oppoPiece){pieceCount++;}
         if(boardPositions[posW].getPiece() == selfPiece && pieceCount > 0){
             //std::cout << "\n\nfound the flanking piece in the west";
@@ -811,7 +811,7 @@ bool Board::checkMove(int pos)
         //std::cout << "\n\nChecking NW: " << boardPositions[posNW].getPiece();
         if(posNW < 0 || posNW > 63){break;}
         if(diffNW != -1){loop = false; break;}
-        if(boardPositions[posNW].getPiece() == '.'){loop = false;}
+        if(boardPositions[posNW].getPiece() == Position::EMPTY){loop = false;}
         if(boardPositions[posNW].getPiece() == oppoPiece){pieceCount++;}
         if(boardPositions[posNW].getPiece() == selfPiece && pieceCount > 0){
             //std::cout << "\n\nfound the flanking piece in the North West";
