@@ -191,21 +191,19 @@ void Board::play()
             }
         }
     }
-    //prompt user options
 
+    //prompt user options
     Board::drawBoard();
 
     int emptyValue;
-
     int input;
     std::cout << "\n\nIt is " << current.getName() << "'s turn.";
     if(current.getName() == first.getName()){std::cout << "\nPlace a BLACK (B) token. ";}
     else if(current.getName() == second.getName()){std::cout << "\nPlace a WHITE (W) token. ";}
 
-
     bool again = true;
     while(again){
-        { //win condition checker
+        { //win condition checker MAKE FUNCTION
         int temp;
         int counter = 64;
         int whiteCounter = 0;
@@ -407,6 +405,9 @@ void Board::setBoardPositions(std::string s)
     for(int i = 0; i < s.length(); i++)
     {
         Board::boardPositions[i].setPiece(s[i]);
+    }
+    for(int i = 2; i < 6; i++){
+        Board::boardPositions[i].setPiece(UnplayablePosition::UNPLAYABLE);
     }
 
 }
